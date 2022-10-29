@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
 namespace GistNet
@@ -14,33 +15,30 @@ namespace GistNet
 
         }
 
-        public async Task<HttpResponseMessage> Push()
+        public async Task<string> Push()
         {
             try
             {
-                HttpResponseMessage response;
+                HttpResponseMessage Res;
 
-                using (HttpClient httpClient = new())
-                {
-                    httpClient.DefaultRequestHeaders.UserAgent.TryParseAdd("request");
+                using HttpClient HClnt = new();
+                HClnt.DefaultRequestHeaders.UserAgent.TryParseAdd("request");
 
-                    using (HttpRequestMessage request = new(new HttpMethod("POST"), "https://api.github.com/gists"))
-                    {
-                        request.Headers.TryAddWithoutValidation("Accept", "application/vnd.github+json");
-                        request.Headers.TryAddWithoutValidation("Authorization", "Bearer " + Token.Trim());
+                using HttpRequestMessage Req = new(new HttpMethod("POST"), "https://api.github.com/gists");
+                Req.Headers.TryAddWithoutValidation("Accept", "application/vnd.github+json");
+                Req.Headers.TryAddWithoutValidation("Authorization", "Bearer " + Token.Trim());
 
-                        request.Content = new StringContent(JsonSerializer.Serialize(Content));
-                        request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/x-www-form-urlencoded");
+                Req.Content = new StringContent(JsonSerializer.Serialize(Content));
+                Req.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/x-www-form-urlencoded");
 
-                        response = await httpClient.SendAsync(request);
+                Res = await HClnt.SendAsync(Req);
+                Res.EnsureSuccessStatusCode();
 
-                        response.EnsureSuccessStatusCode();
-                    }
-                }
-                return response;
+                string StrRes = await Res.Content.ReadAsStringAsync();
+                //return JsonNode.Parse(StrResp)!.AsObject();
+                return StrRes;
             }
             catch (Exception ex) { throw new Exception(ex.Message, ex); }
-
         }
 
 
