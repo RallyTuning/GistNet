@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace GistNet
 {
@@ -45,21 +46,23 @@ namespace GistNet
 
         public class Gist
         {
-#pragma warning disable IDE1006 // Due of the first capital letter.
-            public string description { get; set; } = String.Empty;
-            public bool @public { get; set; } = true;
-            public Dictionary<string, FileContent> files { get; set; } = new();
+            [JsonPropertyName("description")]
+            public string Description { get; set; } = String.Empty;
+            [JsonPropertyName("public")]
+            public bool IsPublic { get; set; } = true;
+            [JsonPropertyName("files")]
+            public Dictionary<string, FileContent> FilesList { get; set; } = new();
 
             public class FileContent
             {
-                public string content { get; set; } = String.Empty;
+                [JsonPropertyName("content")]
+                public string Content { get; set; } = String.Empty;
 
                 public FileContent(string Content)
                 {
-                    this.content = Content;
+                    this.Content = Content;
                 }
             }
-#pragma warning restore IDE1006 // Due of the first capital letter.
         }
     }
 }
