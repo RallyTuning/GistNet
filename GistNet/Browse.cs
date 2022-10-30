@@ -2,17 +2,27 @@
 
 namespace GistNet
 {
+    /// <summary>Browse existing Gists</summary>
     public class Browse
     {
-        public string Token { get; set; } = String.Empty;
+        /// <summary>Personal Token key from GitHub</summary>
+        public string Token { get; set; } = string.Empty;
+
+        /// <summary>User to get Gists of (If different from the Token's owner, then will only show public Gists)</summary>
         public string User { get; set; } = string.Empty;
 
+        /// <summary>Browse existing Gist</summary>
         public Browse()
         {
 
         }
 
-        public async Task<string> Get()
+        /// <summary>
+        /// Get a list of any Gist of the logged user
+        /// </summary>
+        /// <returns>A big JSON with all the user Gist</returns>
+        /// <exception cref="Exception">Any error</exception>
+        public async Task<string> GetAll()
         {
             try
             {
@@ -29,7 +39,7 @@ namespace GistNet
                 Res.EnsureSuccessStatusCode();
 
                 string StrRes = await Res.Content.ReadAsStringAsync();
-                //return JsonObject.Parse(StrResp)!.AsObject();
+
                 return StrRes;
             }
             catch (Exception ex) { throw new Exception(ex.Message, ex); }

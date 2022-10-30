@@ -1,29 +1,24 @@
-﻿using System.Net.Http.Headers;
-using System.Text.Json;
-
-namespace GistNet
+﻿namespace GistNet
 {
-    /// <summary>Delete an existing Gist</summary>
-    public class Delete
+    /// <summary>Get a single Gist by their ID</summary>
+    public  class GistByID
     {
         /// <summary>Personal Token key from GitHub</summary>
         public string Token { get; set; } = string.Empty;
 
-        /// <summary>ID of the Gist to delete</summary>
-        public string ID { get; set; } = string.Empty;
-
-        /// <summary>Delete an existing Gist</summary>
-        public Delete()
+        /// <summary>Get a single Gist by their ID</summary>
+        public  GistByID()
         {
-
+           
         }
 
         /// <summary>
-        /// Delete your Gist on GitHub
+        /// Get a single Gist by their ID
         /// </summary>
-        /// <returns>A JSON with the new Gist details</returns>
+        /// <param name="ID">ID of the Gist to obtain</param>
+        /// <returns>A JSON with the Gist details</returns>
         /// <exception cref="Exception">Any error</exception>
-        public async Task<string> Confirm()
+        public async Task<string> Get(string ID)
         {
             try
             {
@@ -32,16 +27,19 @@ namespace GistNet
                 using HttpClient HClnt = new();
                 HClnt.DefaultRequestHeaders.UserAgent.TryParseAdd("request");
 
-                using HttpRequestMessage Req = new(new HttpMethod("DELETE"), $"https://api.github.com/gists/{ID}");
+                using HttpRequestMessage Req = new(new HttpMethod("GET"), $"https://api.github.com/gists/{ID}");
                 Req.Headers.TryAddWithoutValidation("Accept", "application/vnd.github+json");
                 Req.Headers.TryAddWithoutValidation("Authorization", "Bearer " + Token.Trim());
 
                 Res = await HClnt.SendAsync(Req);
                 Res.EnsureSuccessStatusCode();
 
-                return Res.StatusCode.ToString();
+                string StrRes = await Res.Content.ReadAsStringAsync();
+
+                return StrRes;
             }
             catch (Exception ex) { throw new Exception(ex.Message, ex); }
         }
+
     }
 }
