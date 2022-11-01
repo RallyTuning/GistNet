@@ -14,6 +14,7 @@
         public GetByID(string Token, string ID)
         {
             if (string.IsNullOrWhiteSpace(Token)) { throw new Exception("Empty Token"); }
+            if (string.IsNullOrWhiteSpace(ID)) { throw new Exception("Empty Gist ID"); }
 
             StrToken = Token;
             StrID = ID;

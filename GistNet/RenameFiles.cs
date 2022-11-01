@@ -7,7 +7,7 @@ namespace GistNet
     public class RenameFiles
     {
         private string StrToken { get; set; } = string.Empty;
-        private string StrGistID { get; set; } = string.Empty;
+        private string StrID { get; set; } = string.Empty;
 
         /// <summary>Content of the Gist</summary>
         public Details Content { get; set; } = new();
@@ -16,14 +16,14 @@ namespace GistNet
         /// Rename files inside an existing Gist
         /// </summary>
         /// <param name="Token">Personal Token key from GitHub</param>
-        /// <param name="GistID">ID of the Gist to update</param>
-        public RenameFiles(string Token, string GistID)
+        /// <param name="ID">ID of the Gist to update</param>
+        public RenameFiles(string Token, string ID)
         {
             if (string.IsNullOrWhiteSpace(Token)) { throw new Exception("Empty Token"); }
-            if (string.IsNullOrWhiteSpace(GistID)) { throw new Exception("Empty Gist ID"); }
+            if (string.IsNullOrWhiteSpace(ID)) { throw new Exception("Empty Gist ID"); }
 
             StrToken = Token;
-            StrGistID = GistID;
+            StrID = ID;
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace GistNet
                 HttpResponseMessage Res;
 
                 using HttpClient HClnt = new();
-                using HttpRequestMessage Req = new(new HttpMethod("PATCH"), $"https://api.github.com/gists/{StrGistID}");
+                using HttpRequestMessage Req = new(new HttpMethod("PATCH"), $"https://api.github.com/gists/{StrID}");
                 Req.Headers.Accept.Clear();
                 Req.Headers.Add("User-Agent", "GistNet");
                 Req.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));

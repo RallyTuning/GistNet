@@ -16,6 +16,8 @@
         public GetGistRevision(string Token, string ID, string Revision)
         {
             if (string.IsNullOrWhiteSpace(Token)) { throw new Exception("Empty Token"); }
+            if (string.IsNullOrWhiteSpace(ID)) { throw new Exception("Empty Gist ID"); }
+            if (string.IsNullOrWhiteSpace(Revision)) { throw new Exception("Empty Revision SHA"); }
 
             StrToken = Token;
             StrID = ID;
