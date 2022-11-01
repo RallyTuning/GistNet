@@ -34,11 +34,11 @@ namespace GistNet
                 HttpResponseMessage Res;
 
                 using HttpClient HClnt = new();
-                HClnt.DefaultRequestHeaders.UserAgent.TryParseAdd("request");
-
                 using HttpRequestMessage Req = new(new HttpMethod("POST"), "https://api.github.com/gists");
-                Req.Headers.TryAddWithoutValidation("Accept", "application/vnd.github+json");
-                Req.Headers.TryAddWithoutValidation("Authorization", "Bearer " + StrToken.Trim());
+                Req.Headers.Accept.Clear();
+                Req.Headers.Add("User-Agent", "GistNet");
+                Req.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+                Req.Headers.Add("Authorization", "Bearer " + StrToken.Trim());
 
                 Req.Content = new StringContent(JsonSerializer.Serialize(Content));
                 Req.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/x-www-form-urlencoded");

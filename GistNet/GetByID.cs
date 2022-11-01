@@ -31,11 +31,11 @@
                 HttpResponseMessage Res;
 
                 using HttpClient HClnt = new();
-                HClnt.DefaultRequestHeaders.UserAgent.TryParseAdd("request");
-
                 using HttpRequestMessage Req = new(new HttpMethod("GET"), $"https://api.github.com/gists/{StrID}");
-                Req.Headers.TryAddWithoutValidation("Accept", "application/vnd.github+json");
-                Req.Headers.TryAddWithoutValidation("Authorization", "Bearer " + StrToken.Trim());
+                Req.Headers.Accept.Clear();
+                Req.Headers.Add("User-Agent", "GistNet");
+                Req.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+                Req.Headers.Add("Authorization", "Bearer " + StrToken.Trim());
 
                 Res = await HClnt.SendAsync(Req);
                 Res.EnsureSuccessStatusCode();
