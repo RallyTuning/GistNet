@@ -1,35 +1,40 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using static GistNet.RenameFiles;
 
 namespace GistNet
 {
-    /// <summary>Create a new Gist</summary>
-    public class Create
+    /// <summary>Rename files inside an existing Gist</summary>
+    public class RenameFiles
     {
         /// <summary>Personal Token key from GitHub</summary>
         private string StrToken { get; set; } = string.Empty;
+
+        /// <summary>ID of the Gist to update</summary>
+        private string StrGistID { get; set; } = string.Empty;
 
         /// <summary>Content of the Gist</summary>
         public Details Content { get; set; } = new();
 
         /// <summary>
-        /// Create a new Gist
+        /// Rename files inside an existing Gist
         /// </summary>
         /// <param name="Token">Personal Token key from GitHub</param>
-        public Create(string Token)
+        /// <param name="GistID">ID of the Gist to update</param>
+        public RenameFiles(string Token, string GistID)
         {
             if (string.IsNullOrWhiteSpace(Token)) { throw new Exception("Empty Token"); }
- 
+            if (string.IsNullOrWhiteSpace(GistID)) { throw new Exception("Empty Gist ID"); }
+
             StrToken = Token;
+            StrGistID = GistID;
         }
 
         /// <summary>
-        /// Push the new Gist on GitHub
+        /// Update the selected Gist with the new details
         /// </summary>
-        /// <returns>A JSON with the new Gist details</returns>
+        /// <returns>A JSON with the Gist details</returns>
         /// <exception cref="Exception">Any error</exception>
-        public async Task<string> Push()
+        public async Task<string> Patch()
         {
             try
             {
@@ -38,7 +43,7 @@ namespace GistNet
                 using HttpClient HClnt = new();
                 HClnt.DefaultRequestHeaders.UserAgent.TryParseAdd("request");
 
-                using HttpRequestMessage Req = new(new HttpMethod("POST"), "https://api.github.com/gists");
+                using HttpRequestMessage Req = new(new HttpMethod("PATCH"), $"https://api.github.com/gists/{StrGistID}");
                 Req.Headers.TryAddWithoutValidation("Accept", "application/vnd.github+json");
                 Req.Headers.TryAddWithoutValidation("Authorization", "Bearer " + StrToken.Trim());
 
@@ -58,15 +63,7 @@ namespace GistNet
         /// <summary>THe content Gist class</summary>
         public class Details
         {
-            /// <summary>A short description of the Gist</summary>
-            [JsonPropertyName("description")]
-            public string Description { get; set; } = string.Empty;
-
-            /// <summary>The visibility of the Gist, <c>True</c> public or <c>False</c> for private</summary>
-            [JsonPropertyName("public")]
-            public bool IsPublic { get; set; } = true;
-
-            /// <summary>A list of files to attach to the Gist</summary>
+            /// <summary>A list of files to rename</summary>
             [JsonPropertyName("files")]
             public Dictionary<string, FileContent> Files { get; set; } = new();
 
@@ -74,13 +71,13 @@ namespace GistNet
             public class FileContent
             {
                 /// <summary>Content of the file</summary>
-                [JsonPropertyName("content")]
-                public string Content { get; set; } = string.Empty;
+                [JsonPropertyName("filename")]
+                public string FileName { get; set; } = string.Empty;
 
                 /// <summary>Content of the file</summary>
-                public FileContent(string Content)
+                public FileContent(string NewName)
                 {
-                    this.Content = Content;
+                    this.FileName = NewName;
                 }
             }
         }

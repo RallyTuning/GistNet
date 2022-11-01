@@ -1,15 +1,20 @@
 ﻿namespace GistNet
 {
     /// <summary>Get a single Gist by their ID</summary>
-    public  class GistByID
+    public  class GetByID
     {
         /// <summary>Personal Token key from GitHub</summary>
-        public string Token { get; set; } = string.Empty;
+        private string StrToken { get; set; } = string.Empty;
 
-        /// <summary>Get a single Gist by their ID</summary>
-        public  GistByID()
+        /// <summary>
+        /// Get a single Gist by their ID
+        /// </summary>
+        /// <param name="Token">Personal Token key from GitHub</param>
+        public GetByID(string Token)
         {
-           
+            if (string.IsNullOrWhiteSpace(Token)) { throw new Exception("Empty Token"); }
+
+            StrToken = Token;
         }
 
         /// <summary>
@@ -29,7 +34,7 @@
 
                 using HttpRequestMessage Req = new(new HttpMethod("GET"), $"https://api.github.com/gists/{ID}");
                 Req.Headers.TryAddWithoutValidation("Accept", "application/vnd.github+json");
-                Req.Headers.TryAddWithoutValidation("Authorization", "Bearer " + Token.Trim());
+                Req.Headers.TryAddWithoutValidation("Authorization", "Bearer " + StrToken.Trim());
 
                 Res = await HClnt.SendAsync(Req);
                 Res.EnsureSuccessStatusCode();
