@@ -3,10 +3,7 @@
     /// <summary>Delete an existing Gist</summary>
     public class Delete
     {
-        /// <summary>Personal Token key from GitHub</summary>
         private string StrToken { get; set; } = string.Empty;
-
-        /// <summary>ID of the Gist to delete</summary>
         private string StrGistID { get; set; } = string.Empty;
 
         /// <summary>

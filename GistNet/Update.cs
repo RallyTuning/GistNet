@@ -6,10 +6,7 @@ namespace GistNet
     /// <summary>Update an existing Gist by changing the description or adding a new file</summary>
     public class UpdateGist
     {
-        /// <summary>Personal Token key from GitHub</summary>
         private string StrToken { get; set; } = string.Empty;
-
-        /// <summary>ID of the Gist to update</summary>
         private string StrGistID { get; set; } = string.Empty;
 
         /// <summary>Content of the Gist</summary>

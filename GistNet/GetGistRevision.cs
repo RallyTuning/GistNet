@@ -1,22 +1,25 @@
 ﻿namespace GistNet
 {
     /// <summary>Get a single Gist by their ID</summary>
-    public class GetByID
+    public class GetGistRevision
     {
         private string StrToken { get; set; } = string.Empty;
         private string StrID { get; set; } = string.Empty;
+        private string StrRevision { get; set; } = string.Empty;
 
         /// <summary>
         /// Get a single Gist by their ID
         /// </summary>
         /// <param name="Token">Personal Token key from GitHub</param>
         /// <param name="ID">ID of the Gist to obtain</param>
-        public GetByID(string Token, string ID)
+        /// <param name="Revision">The SHA of the requested revision</param>
+        public GetGistRevision(string Token, string ID, string Revision)
         {
             if (string.IsNullOrWhiteSpace(Token)) { throw new Exception("Empty Token"); }
 
             StrToken = Token;
             StrID = ID;
+            StrRevision = Revision;
         }
 
         /// <summary>
@@ -31,11 +34,11 @@
                 HttpResponseMessage Res;
 
                 using HttpClient HClnt = new();
-                HClnt.DefaultRequestHeaders.UserAgent.TryParseAdd("request");
-
-                using HttpRequestMessage Req = new(new HttpMethod("GET"), $"https://api.github.com/gists/{StrID}");
-                Req.Headers.TryAddWithoutValidation("Accept", "application/vnd.github+json");
-                Req.Headers.TryAddWithoutValidation("Authorization", "Bearer " + StrToken.Trim());
+                using HttpRequestMessage Req = new(new HttpMethod("GET"), $"https://api.github.com/gists/{StrID}/{StrRevision}");
+                Req.Headers.Accept.Clear();
+                Req.Headers.Add("User-Agent", "GistNet");
+                Req.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+                Req.Headers.Add("Authorization", "Bearer " + StrToken.Trim());
 
                 Res = await HClnt.SendAsync(Req);
                 Res.EnsureSuccessStatusCode();

@@ -1,13 +1,11 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using static GistNet.RenameFiles;
 
 namespace GistNet
 {
     /// <summary>Create a new Gist</summary>
     public class Create
     {
-        /// <summary>Personal Token key from GitHub</summary>
         private string StrToken { get; set; } = string.Empty;
 
         /// <summary>Content of the Gist</summary>
@@ -20,7 +18,7 @@ namespace GistNet
         public Create(string Token)
         {
             if (string.IsNullOrWhiteSpace(Token)) { throw new Exception("Empty Token"); }
- 
+
             StrToken = Token;
         }
 
@@ -62,7 +60,7 @@ namespace GistNet
             [JsonPropertyName("description")]
             public string Description { get; set; } = string.Empty;
 
-            /// <summary>The visibility of the Gist, <c>True</c> public or <c>False</c> for private</summary>
+            /// <summary>The visibility of the Gist, <see langword="true"/> for public or <see langword="false"/> for private</summary>
             [JsonPropertyName("public")]
             public bool IsPublic { get; set; } = true;
 
