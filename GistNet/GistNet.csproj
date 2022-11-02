@@ -16,6 +16,8 @@
     <Title>GistNet</Title>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <Description>A simple GitHub API interpreter</Description>
+    <PackageProjectUrl>https://github.com/RallyTuning/GistNet</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

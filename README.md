@@ -1,7 +1,11 @@
 # GistNet
-A small yet useful .Net library for manage GitHub Gists via API and in a very easy way!
+⭐ A small yet useful .Net library for manage GitHub Gists via API and in a very easy way!
 
-## Table Of Content
+✅ If you have some issues with the code, [open an issue](https://github.com/RallyTuning/GistNet/issues).
+
+✅ For questions, ideas, how-to, etc, please use the [discussions area](https://github.com/RallyTuning/GistNet/discussions), thanks!
+
+## 🧭Table Of Content
   - [Features](#features)
   - [Installation](#installation)
   - [How to use](#how-to-use)
@@ -20,27 +24,27 @@ A small yet useful .Net library for manage GitHub Gists via API and in a very ea
   - [Known issues](#known-issues)
   - [Incoming features](#incoming-features)
 
-## Features
+## ✨Features
 - Browse Gists of any user or your own by ID, date, pagination and revision
 - Create, edit and delete Gists
 - Rename and delete Gists files
 - More to come...
 
 ---
-## Installation
+## 🔌Installation
 1. Download the release
 2. Add it as a dependency to your project
 3. Copy and paste the code below
 4. Enjoy!
 
 ---
-## How to use
+## 📐How to use
 Just add these lines of code in your project!
 Be careful, these examples are for **.Net 6** for use them in .Net Framework, you need to change any `new(...)` with `new ClassName(...)`
 Also, ensure that your method is **async**.
 
 ---
-### Browse a Gist
+### 🔍Browse a Gist
 ```c#
 GistNet.Browse TheGist = new("YOUR_GITHUB_TOKEN", "RallyTuning");
 string ReturnedString = await TheGist.GetAll();
@@ -81,7 +85,7 @@ string ReturnedString = await TheGist.Get();
 ```
 
 ---
-### Create a Gist
+### ✳Create a Gist
 ```c#
 private async void Button1_Click(object sender, EventArgs e)
 {
@@ -96,7 +100,7 @@ private async void Button1_Click(object sender, EventArgs e)
 ```
 
 ---
-### Update a Gist
+### ✏Update a Gist
 You can edit the Gist description and a content of any **existing** file, just "add" them inside the `Files list`.
 ```c#
 GistNet.UpdateGist TheGist = new("YOUR_GITHUB_TOKEN", "GIST_ID");
@@ -108,7 +112,7 @@ string ReturnedString = await TheGist.Patch();
 ```
 
 ---
-### Delete a Gist
+### ❌Delete a Gist
 ```c#
 GistNet.Delete TheGist = new("YOUR_GITHUB_TOKEN", "GIST_ID");
 string ReturnedString = await TheGist.Confirm();
@@ -116,7 +120,7 @@ string ReturnedString = await TheGist.Confirm();
 It will not return a JSON, but the StatusCodes of the HTTP Request.
 
 ---
-### Rename files inside the Gist
+### 🔤Rename files inside the Gist
 
 ```c#
 GistNet.RenameFiles TheGist = new("YOUR_GITHUB_TOKEN", "GIST_ID");
@@ -127,7 +131,7 @@ string ReturnedString = await TheGist.Patch();
 It is possible to **rename** multiple files at once, just "add" them inside the `Files list`.
 
 ---
-### Delete files inside the Gist
+### ✂Delete files inside the Gist
 For delete a file(s), just "add" the name in the list and set the content of it to `null` or better, like the example, `new()`.
 
 ```c#
@@ -138,7 +142,7 @@ string ReturnedString = await TheGist.Patch();
 It is possible to **delete** multiple files at once, just "add" them inside the `Files list`.
 
 ---
-### Get a revision of a Gist
+### 📚Get a revision of a Gist
 You can know the `SHA` of any Gist revision, by looking in the `history` node of any returned JSON.
 ```c#
 GistNet.GetGistRevision TheGist = new("YOUR_GITHUB_TOKEN", "GIST_ID", "SHA_OF_THE_REVISION");
@@ -146,12 +150,12 @@ string ReturnedString = await TheGist.Get();
 ```
 
 
-## Known issues
+## 🗑Known issues
 
 - Nothing yet 🥳
 
 
-## Incoming features
+## 💡Incoming features
 
 - List starred gists
 - List gist commits
