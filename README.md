@@ -40,7 +40,7 @@
 ## 📐 How to use
 Just add these lines of code in your project!
 
-Be careful, these examples are for **.Net 6** for use them in .Net Framework, you need to change any `new(...)` with `new ClassName(...)`\
+Be careful, these examples are for **.Net 6**. For use them in .Net Framework, you need to change any `new(...)` with `new ClassName(...)`\
 Example: `GistNet.Create TheGist = new("YOUR_GITHUB_TOKEN");` will be `GistNet.Create TheGist = new GistNet.Create("YOUR_GITHUB_TOKEN");`
 
 Also, ensure that your method is **async**, as the example: From this `private void Button1_Click` to this `private async void Button1_Click`

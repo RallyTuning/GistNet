@@ -12,6 +12,7 @@ namespace GistNet
         /// <summary>List of files to delete</summary>
         public Details Content { get; set; } = new();
 
+
         /// <summary>
         /// Delete files inside an existing Gist
         /// </summary>
@@ -25,6 +26,7 @@ namespace GistNet
             StrToken = Token;
             StrID = ID;
         }
+
 
         /// <summary>
         /// Update the selected Gist with the new details
@@ -56,6 +58,7 @@ namespace GistNet
             }
             catch (Exception ex) { throw new Exception(ex.Message, ex); }
         }
+
 
         /// <summary>THe content Gist class</summary>
         public class Details

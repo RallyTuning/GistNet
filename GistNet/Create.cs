@@ -11,6 +11,7 @@ namespace GistNet
         /// <summary>Content of the Gist</summary>
         public Details Content { get; set; } = new();
 
+
         /// <summary>
         /// Create a new Gist
         /// </summary>
@@ -21,6 +22,7 @@ namespace GistNet
 
             StrToken = Token;
         }
+
 
         /// <summary>
         /// Push the new Gist on GitHub
@@ -52,6 +54,7 @@ namespace GistNet
             }
             catch (Exception ex) { throw new Exception(ex.Message, ex); }
         }
+
 
         /// <summary>THe content Gist class</summary>
         public class Details

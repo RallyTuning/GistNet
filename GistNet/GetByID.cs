@@ -6,6 +6,7 @@
         private string StrToken { get; set; } = string.Empty;
         private string StrID { get; set; } = string.Empty;
 
+
         /// <summary>
         /// Get a single Gist by their ID
         /// </summary>
@@ -19,6 +20,7 @@
             StrToken = Token;
             StrID = ID;
         }
+
 
         /// <summary>
         /// Get a single Gist by their ID
@@ -47,6 +49,5 @@
             }
             catch (Exception ex) { throw new Exception(ex.Message, ex); }
         }
-
     }
 }

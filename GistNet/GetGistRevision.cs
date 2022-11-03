@@ -7,6 +7,7 @@
         private string StrID { get; set; } = string.Empty;
         private string StrRevision { get; set; } = string.Empty;
 
+
         /// <summary>
         /// Get a single Gist by their ID
         /// </summary>
@@ -23,6 +24,7 @@
             StrID = ID;
             StrRevision = Revision;
         }
+
 
         /// <summary>
         /// Get a single Gist by their ID
@@ -51,6 +53,5 @@
             }
             catch (Exception ex) { throw new Exception(ex.Message, ex); }
         }
-
     }
 }

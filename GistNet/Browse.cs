@@ -41,22 +41,6 @@ namespace GistNet
         }
 
         /// <summary>
-        /// Browse existing Gists from a specific date
-        /// </summary>
-        /// <param name="Token">Personal Token key from GitHub</param>
-        /// <param name="User">User to get Gists of (If different from the Token's owner, then will only show public Gists)</param>
-        /// <param name="Since">Only show notifications updated after the given time. This is a timestamp in ISO 8601 format: <c>YYYY-MM-DDTHH:MM:SSZ</c></param>
-        public Browse(string Token, string User, DateTime Since)
-        {
-            if (string.IsNullOrWhiteSpace(Token)) { throw new Exception("Empty Token"); }
-            if (string.IsNullOrWhiteSpace(User)) { throw new Exception("Empty User"); }
-
-            StrToken = Token;
-
-            URL += User + "/gists?since=" + Since.ToString("o", CultureInfo.InvariantCulture);
-        }
-
-        /// <summary>
         /// Browse existing Gists from a specific date, by max amount of them per page and how many in every page
         /// </summary>
         /// <param name="Token">Personal Token key from GitHub</param>
@@ -71,6 +55,22 @@ namespace GistNet
             StrToken = Token;
 
             URL += User + "/gists?per_page=" + Per_Page + "&page=" + Page;
+        }
+
+        /// <summary>
+        /// Browse existing Gists from a specific date
+        /// </summary>
+        /// <param name="Token">Personal Token key from GitHub</param>
+        /// <param name="User">User to get Gists of (If different from the Token's owner, then will only show public Gists)</param>
+        /// <param name="Since">Only show notifications updated after the given time. This is a timestamp in ISO 8601 format: <c>YYYY-MM-DDTHH:MM:SSZ</c></param>
+        public Browse(string Token, string User, DateTime Since)
+        {
+            if (string.IsNullOrWhiteSpace(Token)) { throw new Exception("Empty Token"); }
+            if (string.IsNullOrWhiteSpace(User)) { throw new Exception("Empty User"); }
+
+            StrToken = Token;
+
+            URL += User + "/gists?since=" + Since.ToString("o", CultureInfo.InvariantCulture);
         }
 
         /// <summary>
