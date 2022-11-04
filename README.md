@@ -31,6 +31,7 @@
 
 ---
 ## 🔌 Installation
+0. Ensure that you have installed [.Net 6 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 1. Download the release
 2. Add it as a dependency to your project
 3. Copy and paste the code below
