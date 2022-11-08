@@ -8,12 +8,14 @@
   - [Features](#-features)
   - [Installation](#-installation)
   - [How to use](#-how-to-use)
-    - [Browse a Gist](#-browse-a-gist)
+    - [Explore public Gists](#-explore-public-gists)
       - [By page](#by-page-pagination)
       - [By page and results per page](#by-page-and-results-per-page)
       - [By date](#by-date)
       - [By All-In-One of above](#by-all-in-one-of-above)
-    - [Browse a Gist by ID](#-browse-a-gist-by-id)
+    - [Browse your own Gist](#-browse-your-own-gist)
+    - [Browse a Gist by User](#-browse-gists-by-user)
+    - [Browse a Gist by ID](#-browse-a-gist-by-id) 
     - [Create a Gist](#-create-a-gist)
     - [Update a Gist](#-update-a-gist)
     - [Delete a Gist](#-delete-a-gist)
@@ -24,7 +26,7 @@
   - [Incoming features](#-incoming-features)
 
 ## ✨ Features
-- Browse Gists of any user or your own by ID, date, pagination and revision
+- Browse your own Gists or Gists of any user or by ID, date, pagination and revision
 - Create, edit and delete Gists
 - Rename and delete Gists files
 - More to come...
@@ -47,38 +49,56 @@ Be careful, these examples are for **.Net 6**. For use them in .Net Framework, y
 Also, ensure that your method is **async**, as the example: From this `private void Button1_Click` to this `private async void Button1_Click`.
 
 ---
-### 🔍 Browse a Gist
+### 🔭 Explore public Gists
 ```c#
-GistNet.Browse TheGist = new("YOUR_GITHUB_TOKEN", "RallyTuning");
-string ReturnedString = await TheGist.GetAll();
+GistNet.Explore ExploreCollection = new("YOUR_GITHUB_TOKEN");
+string ReturnedString = await ExploreCollection.GetAll();
 ```
-In this case, you will get the last `30` (public) Gist of the selected username. If this is the owner of the token, you will get the last 30 public ***and*** secret Gists.
+In this case, you will get your latest `30` Gists.
 
 #### By page (pagination)
 By adding and *int* after the *username*, you will be able to browse the pagination.\
 In this case, you will get the `page 2` on the default `30 per page`.
 ```c#
-GistNet.Browse TheGist = new("YOUR_GITHUB_TOKEN", "RallyTuning", 2);
+GistNet.Explore ExploreCollection = new("YOUR_GITHUB_TOKEN", 2);
 ```
 
 #### By page and results per page
 In this case, `10` is the max results for each page, and `2` is the current page to fetch.
 ```c#
-GistNet.Browse TheGist = new("YOUR_GITHUB_TOKEN", "RallyTuning", 10, 2);
+GistNet.Explore ExploreCollection = new("YOUR_GITHUB_TOKEN", 10, 2);
 ```
 
 #### By date
 It is possible to add a `DateTime` to show only Gists created or edited before the gived date.\
 In this example, will return only Gists post `2 November 2022 @ 18:20:00`.
 ```c#
-GistNet.Browse TheGist = new("YOUR_GITHUB_TOKEN", "RallyTuning", new DateTime(2022, 11, 2, 18, 20, 0));
+GistNet.Explore ExploreCollection = new("YOUR_GITHUB_TOKEN", new DateTime(2022, 11, 2, 18, 20, 0));
 ```
 
 #### By All-In-One of above
 Of course you can combine any of above, in this way:
 ```c#
-GistNet.Browse TheGist = new("YOUR_GITHUB_TOKEN", "RallyTuning", new DateTime(2022, 11, 2, 18, 20, 0), 10, 2);
+GistNet.Explore ExploreCollection = new("YOUR_GITHUB_TOKEN", new DateTime(2022, 11, 2, 18, 20, 0), 10, 2);
 ```
+
+---
+### 👽 Browse your own Gist
+```c#
+GistNet.MyGists MyCollection = new("YOUR_GITHUB_TOKEN");
+string ReturnedString = await MyCollection.GetAll();
+```
+In this case, you will get your latest `30` Gists.\
+You can combine [by page or date](#by-page-pagination) same as the *Explore function*, just change `GistNet.Explore` with `GistNet.MyGists`.
+
+---
+### 🛀🏻 Browse Gists by user
+```c#
+GistNet.GetByUser UserCollection = new("YOUR_GITHUB_TOKEN", "RallyTuning");
+string ReturnedString = await UserCollection.GetAll();
+```
+In this case, you will get the latest `30` (public) Gist of the selected username. (If this is the owner of the token, you will get the last 30 public ***and*** secret Gists).\
+You can combine [by page or date](#by-page-pagination) same as the *Explore function*, just change `GistNet.Explore` with `GistNet.GetByUser`.
 
 ---
 ### 🆔 Browse a Gist by ID
