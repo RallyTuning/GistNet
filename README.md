@@ -1,6 +1,12 @@
 # GistNet
 ⭐ A small yet useful .Net library for manage GitHub Gists via API and in a very easy way!
 
+[![GitHub](https://img.shields.io/github/license/RallyTuning/GistNet?label=License)](https://github.com/RallyTuning/GistNet/blob/main/LICENSE.md)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/RallyTuning/GistNet?label=Release)](https://github.com/RallyTuning/GistNet/releases)
+[![Downloads](https://img.shields.io/github/downloads/RallyTuning/GistNet/total?color=%23d24dff&label=Downloads)](https://github.com/RallyTuning/GistNet/releases)
+[![Stars](https://img.shields.io/github/stars/RallyTuning/GistNet?color=%23ffff00&label=Stars)](https://github.com/RallyTuning/GistNet/stargazers)
+[![Issues](https://img.shields.io/github/issues-raw/RallyTuning/GistNet?label=Issues)](https://github.com/RallyTuning/GistNet/issues)
+
 ✅ If you have some issues with the code, [open an issue](https://github.com/RallyTuning/GistNet/issues).\
 ✅ For questions, ideas, how-to, etc, please use the [discussions area](https://github.com/RallyTuning/GistNet/discussions), thanks!
 
