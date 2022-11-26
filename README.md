@@ -84,7 +84,7 @@ GistNet.Explore ExploreCollection = new("YOUR_GITHUB_TOKEN", 10, 2);
 ```
 
 #### By date
-It is possible to add a `DateTime` to show only Gists created or edited before the gived date.\
+It is possible to add a `DateTime` to show only Gists created or edited after the gived date.\
 In this example, will return only Gists post `2 November 2022 @ 18:20:00`.
 ```c#
 GistNet.Explore ExploreCollection = new("YOUR_GITHUB_TOKEN", new DateTime(2022, 11, 2, 18, 20, 0));
