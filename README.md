@@ -50,8 +50,9 @@
 0. Ensure that you have installed [.Net 6 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 1. Download the release
 2. Add it as a dependency to your project
-3. Copy and paste the code below
-4. Enjoy!
+3. Get a GitHub classic Token from [here](https://github.com/settings/tokens) or a new beta Token from [here](https://github.com/settings/tokens?type=beta).
+4. Copy and paste the code below
+5. Enjoy!
 
 ---
 ## 📐 How to use
